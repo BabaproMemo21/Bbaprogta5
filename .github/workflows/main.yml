@@ -1,0 +1,12 @@
+name: Uzun SSH Erişimi (6 saat)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  ssh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360  # Maksimum süre
+    steps:
+      - name: SSH başlat (tmate)
+        uses: mxschmitt/action-tmate@v3
