@@ -6,7 +6,16 @@ on:
 jobs:
   ssh:
     runs-on: ubuntu-latest
-    timeout-minutes: 360  # Maksimum süre
+    timeout-minutes: 360  # 6 saat
+
     steps:
       - name: SSH başlat (tmate)
         uses: mxschmitt/action-tmate@v3
+
+      - name: Kapanmayı engelle (sonsuz bekle)
+        run: |
+          echo "⏳ Sunucu açık, bağlantıyı SSH ile kurdun mu? Otomatik kapanmasın diye bekleniyor..."
+          while true; do
+            echo "⌛ Sunucu hala çalışıyor: $(date)"
+            sleep 60
+          done
