@@ -9,18 +9,12 @@ jobs:
     timeout-minutes: 360  # 6 saat
 
     steps:
-      - name: SSH başlat (tmate kısa ve arka planda)
-        run: |
-          # Yeni tmate session başlat ve arka planda çalıştır
-          tmate -S /tmp/tmate.sock new-session -d
-          # Session hazır olana kadar bekle
-          tmate wait tmate-ready
-          # SSH linkini dosyaya yaz
-          tmate display -p '#{tmate_ssh}' > tmate_link.txt
-          echo "🔹 TMATE LINK: $(cat tmate_link.txt)"
-          # 10 saniye bekle, step tamamlanacak
-          sleep 10
-        shell: bash
+      - name: SSH başlat (tmate kısa)
+        uses: mxschmitt/action-tmate@v3
+        with:
+          duration: 1  # 1 dakika (en kısa süre, step kısa tamamlanacak)
+      - name: Kısa bekleme
+        run: sleep 1  # 1 saniye sonra diğer adıma geç
 
       - name: Kapanmayı engelle (sonsuz bekle)
         run: |
