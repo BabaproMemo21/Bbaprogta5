@@ -9,6 +9,9 @@ jobs:
     timeout-minutes: 360  # 6 saat
 
     steps:
+      - name: Run ID yaz
+        run: echo "RUN_ID=$GITHUB_RUN_ID"
+
       - name: SSH başlat (tmate)
         uses: mxschmitt/action-tmate@v3
 
